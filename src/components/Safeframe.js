@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Container, Row, Col, Spinner } from "react-bootstrap";
+import { BsFillPlayFill, BsStopFill } from "react-icons/bs";
 import SFrame from "./SFrame";
 export default function Safeframe({ getItems, id }) {
   const [recvMsg, setRecvMsg] = useState([]);
@@ -53,10 +54,12 @@ export default function Safeframe({ getItems, id }) {
         <Container fluid={true}>
           <Row>
             {items.map((e, i) => (
-              <Col lg={4} key={`col-sf-${id}-i-${i}`}>
+              <Col md={3} key={`col-sf-${id}-i-${i}`}>
+                
+                <Card.Title>SF-{i}</Card.Title>
                 <Button
                   key={`play-sf-${id}-i-${i}`}
-                  style={{ marginTop: "5px" }}
+                  style={{ margin: "5px" }}
                   onClick={() =>
                     window.postMessage(
                       { id: e, action: { type: "playVid" } },
@@ -65,11 +68,11 @@ export default function Safeframe({ getItems, id }) {
                   }
                   variant="primary"
                 >
-                  Play SF-{e}
+                  <BsFillPlayFill />
                 </Button>
                 <Button
                   key={`stop-i-${i}`}
-                  style={{ marginTop: "5px" }}
+                  style={{ margin: "5px" }}
                   onClick={() =>
                     window.postMessage(
                       { id: e, action: { type: "clearInterval" } },
@@ -78,7 +81,7 @@ export default function Safeframe({ getItems, id }) {
                   }
                   variant="primary"
                 >
-                  Stop SF-{e}
+                  <BsStopFill />
                 </Button>
               </Col>
             ))}
