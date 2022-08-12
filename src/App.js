@@ -4,33 +4,40 @@ import MyCard from "./components/MyCard";
 import Safeframe from "./components/Safeframe";
 export default function App() {
   console.log("hello?");
-  const [number, setNumber] = useState(1);
+  const [number, setNumber] = useState(0);
   const [dark, setDark] = useState(false);
 
   // const getItems = useCallback(() => {
   //   return [number, number + 1, number + 2];
   // }, [number]);
   const getItems = () => {
-    return [number, number + 1, number + 2];
+    return [...Array(number).keys()];
   };
 
   return (
-    <Container>
+    <Container fluid={true}>
       <Row>
         <Col lg="3">
           <h1 onClick={() => setNumber(number + 1)}>{number}</h1>
           <h1 onClick={() => setDark(!dark)}>{JSON.stringify(dark)}</h1>
           <h1>{getItems()}</h1>
-          <Safeframe getItems={getItems} id={1} />
-          <Safeframe getItems={getItems} id={2} />
         </Col>
-        <Col lg="3">
+      </Row>
+      <Row>
+        {[...Array(number).keys()].map((e) => {
+          return (
+            <Col lg="3">
+              <Safeframe getItems={getItems} id={e} />
+            </Col>
+          );
+        })}
+        {/* <Col lg="3">
           <MyCard getItems={getItems} />
         </Col>
         <Col lg="3">
           <h1>{getItems()}</h1>
           <MyCard getItems={getItems} />
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );
