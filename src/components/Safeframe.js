@@ -56,7 +56,7 @@ export default function Safeframe({ getItems, id }) {
             {items.map((e, i) => (
               <Col md={3} key={`col-sf-${id}-i-${i}`}>
                 
-                <Card.Title>SF-{i}</Card.Title>
+                <Card.Title>SF{i}</Card.Title>
                 <Button
                   key={`play-sf-${id}-i-${i}`}
                   style={{ margin: "5px" }}
