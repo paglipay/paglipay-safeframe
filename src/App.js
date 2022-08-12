@@ -24,9 +24,9 @@ export default function App() {
         </Col>
       </Row>
       <Row>
-        {[...Array(number).keys()].map((e) => {
+        {[...Array(number).keys()].map((e,i) => {
           return (
-            <Col lg="3">
+            <Col key={`Col-${i}`} lg="3">
               <Safeframe getItems={getItems} id={e} />
             </Col>
           );
