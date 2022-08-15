@@ -18,7 +18,10 @@ export default function Safeframe({ getItems, id }) {
       } else if (e.data?.action === "broadcast") {
         setItems(getItems);
         setRecvMsg([...recvMsg, JSON.stringify(e.data)]);
-        sfRef.current?.contentWindow?.postMessage(e.data, "*");
+        sfRef.current?.contentWindow?.postMessage(
+          { action: { type: "clearInterval" } },
+          "*"
+        );
       }
     },
     [getItems, id, recvMsg]
@@ -75,12 +78,13 @@ export default function Safeframe({ getItems, id }) {
                 <Button
                   key={`play-sf-${id}-i-${i}`}
                   style={{ margin: "5px" }}
-                  onClick={() =>
+                  onClick={() => {
+                    window.postMessage({ action: "broadcast" }, "*");
                     window.postMessage(
                       { id: e, action: { type: "playVid" } },
                       "*"
-                    )
-                  }
+                    );
+                  }}
                   variant="primary"
                 >
                   <BsFillPlayFill />
