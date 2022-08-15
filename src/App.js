@@ -31,13 +31,6 @@ export default function App() {
             </Col>
           );
         })}
-        {/* <Col lg="3">
-          <MyCard getItems={getItems} />
-        </Col>
-        <Col lg="3">
-          <h1>{getItems()}</h1>
-          <MyCard getItems={getItems} />
-        </Col> */}
       </Row>
     </Container>
   );
