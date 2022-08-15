@@ -18,10 +18,26 @@ export default function Safeframe({ getItems, id }) {
       } else if (e.data?.action === "broadcast") {
         setItems(getItems);
         setRecvMsg([...recvMsg, JSON.stringify(e.data)]);
+        sfRef.current?.contentWindow?.postMessage(e.data, "*");
       }
     },
-    [getItems, id]
+    [getItems, id, recvMsg]
   );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // const handleMessage =
+  //   (e) => {
+  //     // console.log("Safeframe handleMessage getItems: ", id);
+  //     // setRecvMsg([...recvMsg, JSON.stringify(e.data)]);
+  //     if (e.data.id === id) {
+  //       console.log("Safeframe handleMessage getItems e.data.id: ", id, e);
+  //       setItems(getItems);
+  //       setRecvMsg([...recvMsg, JSON.stringify(e.data)]);
+  //       sfRef.current?.contentWindow?.postMessage(e.data, "*");
+  //     } else if (e.data?.action === "broadcast") {
+  //       setItems(getItems);
+  //       setRecvMsg([...recvMsg, JSON.stringify(e.data)]);
+  //     }
+  //   }
 
   useEffect(() => {
     console.log("Safeframe useEffect handleMessage: ", id);
@@ -55,7 +71,6 @@ export default function Safeframe({ getItems, id }) {
           <Row>
             {items.map((e, i) => (
               <Col md={3} key={`col-sf-${id}-i-${i}`}>
-                
                 <Card.Title>SF{i}</Card.Title>
                 <Button
                   key={`play-sf-${id}-i-${i}`}
